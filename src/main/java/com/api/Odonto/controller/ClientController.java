@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -42,18 +43,21 @@ public class ClientController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Find client by id")
     public ResponseEntity<Client> findById(@RequestParam Long id) {
         Client client = clientService.findById(id);
         return ResponseEntity.ok(client);
     }
     
     @GetMapping("/{email}")
+    @Operation(summary = "Find client by email")
     public ResponseEntity<Client> findByEmail(@RequestParam String email) {
         Client client = clientService.findByEmail(email);
         return ResponseEntity.ok(client);
     }
 
     @PostMapping
+    @Operation(summary = "Create client")
     public ResponseEntity<Client> createClient(@RequestBody Client client) {
         Client createdClient = clientService.createClient(client);
         ServletUriComponentsBuilder.fromCurrentRequest();
@@ -65,6 +69,7 @@ public class ClientController {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Update client")
     public ResponseEntity<Client> update(@PathVariable Long id, @RequestBody Client client) {
         Client updatedClient = clientService.update(id, client);
         if(findById(id) == null) {
@@ -77,6 +82,18 @@ public class ClientController {
                     .toUri();
             return ResponseEntity.created(location).body(updatedClient);
         }
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete client by id")
+    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+        if(findById(id) == null) {
+            return ResponseEntity.notFound().build();
+        }else{
+            clientService.deleteById(id);
+        return ResponseEntity.noContent().build();
+        }
+        
     }
     
     
