@@ -9,10 +9,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "senha")
     private String password;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "tipo")
     private UserType type;
 
     @ManyToOne

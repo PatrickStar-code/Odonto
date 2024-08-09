@@ -9,7 +9,11 @@ public class Schedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "horario")
+    @Temporal(TemporalType.TIME)
     private String hour;
+
+    @Column(name = "disponivel", nullable = false, columnDefinition = "boolean default true",length = 1)
     private Boolean available;
 
     @ManyToOne

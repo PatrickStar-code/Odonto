@@ -1,7 +1,11 @@
 package com.api.Odonto.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.Date;
+
+;
 
 @Entity
 @Table(name = "tb_agendamentos")
@@ -22,9 +26,22 @@ public class Appointment {
     @JoinColumn(name = "agenda_id")
     private Schedule agenda;
 
+    @Column(name = "data_agendamento")
+    @Temporal(TemporalType.DATE)
+    @NotNull
+
     private Date appointmentDate;
+
+    @Column(name = "hora_agendamento")
+    @NotNull
+
+    @Temporal(TemporalType.TIME)
     private String appointmentHour;
-    private String status;
+
+    @Column
+    @NotNull
+
+    private StatusEnun status;
 
     //Getters and Setters
     public Long getId() {
@@ -63,13 +80,11 @@ public class Appointment {
     public void setAppointmentHour(String appointmentHour) {
         this.appointmentHour = appointmentHour;
     }
-    public String getStatus() {
+    public StatusEnun getStatus() {
         return status;
     }
-    public void setStatus(String status) {
+    public void setStatus(StatusEnun status) {
         this.status = status;
     }
-
-    // Getters and Setters
     
 }

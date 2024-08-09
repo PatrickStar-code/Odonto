@@ -2,14 +2,32 @@ package com.api.Odonto.model;
 
 import java.util.Date;
 
+import jakarta.persistence.*;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.validation.constraints.NotNull;
 
 @MappedSuperclass
 public class Person {
+
+    @Column(name = "nome", length = 100)
+    @NotNull
     private String name;
+
+    @Column(name = "email", length = 100)
+    @NotNull
     private String email;
+
+    @Column(name = "Telefone", length = 20)
+    @NotNull
     private String phone;
+
+    @Column(name = "data_nascimento")
+    @Temporal(TemporalType.DATE)
+    @NotNull
     private Date birthDate;
+
+    @Column(name = "cpf", length = 14)
+    @NotNull
     private String cpf;
 
     //Getters and Setters

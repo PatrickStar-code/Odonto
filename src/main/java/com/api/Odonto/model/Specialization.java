@@ -1,6 +1,8 @@
 package com.api.Odonto.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.Set;
 
 @Entity
@@ -10,6 +12,8 @@ public class Specialization {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "descricao")
+    @NotNull
     private String description;
 
     @ManyToMany(mappedBy = "specializations")

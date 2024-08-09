@@ -14,8 +14,14 @@ public class Notification {
     @JoinColumn(name = "usuario_id")
     private User user;
 
+    @Column(name = "mensagem")
     private String message;
+
+    @Column(name = "lida", nullable = false, columnDefinition = "boolean default false",length = 1)
     private Boolean read;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "data_hora")
     private Date timestamp;
 
     //Getters and Setters
