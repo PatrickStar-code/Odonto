@@ -4,11 +4,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.api.Odonto.model.User;
+import com.api.Odonto.request.LoginRequest;
 
 @Repository
 public interface  UserRepository extends JpaRepository<User, Long> {
 
-    User findByEmailAndPassword(String email, String password);
 
+    User findByLogin(String Login);
+
+    
     
 }

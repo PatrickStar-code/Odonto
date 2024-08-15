@@ -1,9 +1,15 @@
 package com.api.Odonto.services.impl;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.api.Odonto.model.User;
 import com.api.Odonto.repository.UserRepository;
+import com.api.Odonto.request.LoginRequest;
 import com.api.Odonto.services.UserService;
 
+@Service
 public class UserImpl implements UserService{
     UserRepository UserRepository;
 
@@ -17,10 +23,6 @@ public class UserImpl implements UserService{
         return UserRepository.findById(id).get();
     }
 
-    @Override
-    public User findByEmailAndPassword(String email, String password) {
-        return UserRepository.findByEmailAndPassword(email, password);
-    }
 
     @Override
     public void deleteById(Long id) {
@@ -28,12 +30,37 @@ public class UserImpl implements UserService{
     }
 
     @Override
-    public void update(Long id, User user) {
+    public User update(Long id, User user) {
         User oldUser = UserRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
-        oldUser.setEmail(user.getEmail());
+        oldUser.setLogin(user.getLogin());
         oldUser.setPassword(user.getPassword());
-        UserRepository.save(oldUser);
-
+        return UserRepository.save(oldUser);
     }
-    
+
+    @Override
+    public List<User> findAll() {
+        return UserRepository.findAll();
+        
+    }
+
+    @Override
+    public User findByLogin(String Login) {
+        return UserRepository.findByLogin(Login);
+    }
+
+
+    public User login(LoginRequest loginRequest) {
+        // Busca o usuário pelo login
+        User user = UserRepository.findByLogin(loginRequest.getLogin());
+
+        // Verifica se o usuário existe e se a senha está correta
+        if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
+            return user;
+        } else {
+            // Retorna null se as credenciais forem inválidas
+            return null;
+        }
+    }
+
+
 }

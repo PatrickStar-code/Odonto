@@ -62,7 +62,7 @@ public class ClientController {
         Client createdClient = clientService.createClient(client);
         ServletUriComponentsBuilder.fromCurrentRequest();
         URI location =  ServletUriComponentsBuilder.fromCurrentRequest()
-                        .path("/{id}")
+                        .path("/")
                         .buildAndExpand(createdClient.getId())
                         .toUri();
         return ResponseEntity.created(location).body(createdClient);
@@ -89,10 +89,10 @@ public class ClientController {
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         if(findById(id) == null) {
             return ResponseEntity.notFound().build();
-        }else{
-            clientService.deleteById(id);
-        return ResponseEntity.noContent().build();
         }
+
+        clientService.deleteById(id);
+        return ResponseEntity.noContent().build();
         
     }
     

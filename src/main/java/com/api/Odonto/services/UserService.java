@@ -1,6 +1,9 @@
 package com.api.Odonto.services;
 
+import java.util.List;
+
 import com.api.Odonto.model.User;
+import com.api.Odonto.request.LoginRequest;
 
 public interface UserService {
 
@@ -8,10 +11,14 @@ public interface UserService {
 
     User findById(Long id);
 
-    User findByEmailAndPassword(String email, String password);
+    User findByLogin(String Login);
+
+    User login(LoginRequest login);
 
     void deleteById(Long id);
 
-    void update(Long id, User user);
+    User update(Long id, User user);
+
+    List<User> findAll();
     
 }
