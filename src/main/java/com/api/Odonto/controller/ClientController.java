@@ -39,22 +39,21 @@ public class ClientController {
     @Operation(summary = "Find all clients")
     public ResponseEntity<List<Client>> findAll() {
         List<Client> clients = clientService.findAll();
+        if(clients.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        else {
         return ResponseEntity.ok(clients);
+        }
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Find client by id")
-    public ResponseEntity<Client> findById(@RequestParam Long id) {
+    public ResponseEntity<Client> findById(@PathVariable Long id) {
         Client client = clientService.findById(id);
         return ResponseEntity.ok(client);
     }
-    
-    @GetMapping("/{email}")
-    @Operation(summary = "Find client by email")
-    public ResponseEntity<Client> findByEmail(@RequestParam String email) {
-        Client client = clientService.findByEmail(email);
-        return ResponseEntity.ok(client);
-    }
+
 
     @PostMapping
     @Operation(summary = "Create client")

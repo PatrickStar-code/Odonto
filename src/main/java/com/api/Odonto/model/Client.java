@@ -8,6 +8,11 @@ public class Client extends Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne
+    @JoinColumn(name = "anamnese_id")
+    private Anamnese anamnese;
+
+
 
     //Getters and Setters
     public Long getId() {
@@ -18,5 +23,12 @@ public class Client extends Person {
         this.id = id;
     }
 
+    public Anamnese getAnamnese() {
+        return anamnese;
+    }
+
+    public void setAnamnese(Anamnese anamnese) {
+        this.anamnese = anamnese;
+    }
     
 }

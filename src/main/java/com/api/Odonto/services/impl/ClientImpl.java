@@ -2,6 +2,7 @@ package com.api.Odonto.services.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.api.Odonto.model.Client;
@@ -9,6 +10,8 @@ import com.api.Odonto.repository.ClientRepository;
 import com.api.Odonto.services.ClientService;
 @Service
 public class ClientImpl implements ClientService {
+
+    @Autowired
     private  ClientRepository clientRepository;
 
     
